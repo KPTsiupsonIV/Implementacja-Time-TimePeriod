@@ -1,4 +1,4 @@
-﻿namespace Time
+﻿namespace czas
 {
     public struct Time
     {
@@ -35,7 +35,7 @@
         }
         public Time(byte hours)
         {
-            _hours = !(hours <= 24) ? _hours = hours : throw new ArgumentException();
+            _hours = !(hours >= 24) ? _hours = hours : throw new ArgumentException();
             _minutes = 0;
             _seconds = 0;
             _milliseconds = 0;

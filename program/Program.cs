@@ -1,12 +1,13 @@
 ﻿using System;
-using Time;
+using czas;
 namespace program
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+           Time Timee = new Time(10);
+            Console.WriteLine( Timee.ToString());
         }
     }
 }
