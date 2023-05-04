@@ -78,7 +78,7 @@
         //przeciazanie operatora !=
         public static bool operator !=(Time a,Time b)
         {
-        
+            return !(a == b);
         }
         
         
