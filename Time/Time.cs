@@ -1,4 +1,5 @@
-﻿namespace Time
+﻿using System;
+namespace czas
 {
     public struct Time : IEquatable<Time>,IComparable<Time>
     {
@@ -59,17 +60,27 @@
             }
             catch(IndexOutOfRangeException)
             {
-                return throw new ArgumentException();
+                throw new ArgumentException();
             }
-            (byte.TryParse(timeParts[0],out zmienna)?(zmienna<24)?_hours = zmienna : throw new ArgumentException() : throw new ArgumentException();
-            (byte.TryParse(timeParts[1],out zmienna)?(zmienna<60)?_minutes = zmienna : throw new ArgumentException() : throw new ArgumentException();
-            (byte.TryParse(timeParts[2],out zmienna)?(zmienna<60)?_seconds = zmienna : throw new ArgumentException() : throw new ArgumentException();
-            (ushort.TryParse(timeParts[3],out zmienna2)?(zmienna2<1000)?_milliseconds = zmienna2 : throw new ArgumentException() : throw new ArgumentException();
+            zmienna = byte.TryParse(timeParts[0],out zmienna)?(zmienna<24)?_hours = zmienna : throw new ArgumentException() : throw new ArgumentException();
+            zmienna = byte.TryParse(timeParts[1], out zmienna) ? (zmienna < 60) ? _minutes = zmienna : throw new ArgumentException() : throw new ArgumentException();
+            zmienna = byte.TryParse(timeParts[2], out zmienna) ? (zmienna < 60) ? _seconds = zmienna : throw new ArgumentException() : throw new ArgumentException();
+            zmienna2 = ushort.TryParse(timeParts[3], out zmienna2) ? (zmienna2 < 1000) ? _milliseconds = zmienna2 : throw new ArgumentException() : throw new ArgumentException();
         }
         
         
         public override string ToString() { return $"{_hours:D2}:{_minutes:D2}:{_seconds:D2}:{_milliseconds:D2}"; }
-        
+
+        public int CompareTo(Time other)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Equals(Time other)
+        {
+            throw new NotImplementedException();
+        }
+
         //przeciazanie operatora ==
         public static bool operator ==(Time a, Time b)
         {
@@ -83,10 +94,10 @@
         //przeciazanie operatora <
         public static bool operator <(Time a,Time b)
         {
-            long A = long.Parse(a._hours) * 3600000 + long.Parse(a._minutes) * 60000 + long.Parse(a._seconds) * 1000 + long.Parse(a._milliseconds);
-            long B = long.Parse(b._hours) * 3600000 + long.Parse(b._minutes) * 60000 + long.Parse(b._seconds) * 1000 + long.Parse(b._milliseconds);
-            
-            if(A < B)
+            long A = Convert.ToInt64(a._hours) * 3600000 + Convert.ToInt64(a._minutes) * 60000 + Convert.ToInt64(a._seconds) * 1000 + Convert.ToInt64(a._milliseconds);
+            long B = Convert.ToInt64(b._hours) * 3600000 + Convert.ToInt64(b._minutes) * 60000 + Convert.ToInt64(b._seconds) * 1000 + Convert.ToInt64(b._milliseconds);
+
+            if (A < B)
             {
             return true;
             }else return false;
