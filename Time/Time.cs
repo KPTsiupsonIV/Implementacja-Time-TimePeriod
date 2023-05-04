@@ -80,7 +80,7 @@
         {
             return !(a == b);
         }
-        
+        //przeciazanie operatora <
         public static bool operator <(Time a,Time b)
         {
             long A = long.Parse(a._hours) * 3600000 + long.Parse(a._minutes) * 60000 + long.Parse(a._seconds) * 1000 + long.Parse(a._milliseconds);
@@ -91,6 +91,27 @@
             return true;
             }else return false;
         }
+        
+        //przeciazanie operatora <=
+        public static bool operator <=(Time a, Time b)
+        {
+           return (a < b || a == b) ?true:false;
+            
+        }
+        
+        //przeciazanie operatora >
+        public static bool operator >(Time a, Time b)
+        {
+            return !(a <= b);
+        }
+        
+        //przeciazanie operatora >=
+        public static bool operator >=(Time a, Time b)
+        {
+          return (a > b || a == b)?true:false;
+        }
+        
+        //działania arytmetyczne na czasie
         
         
 
