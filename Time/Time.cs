@@ -1,6 +1,6 @@
 ﻿namespace Time
 {
-    public struct Time : IEquatable<Time> : IComparable<Time>
+    public struct Time : IEquatable<Time>,IComparable<Time>
     {
         private readonly byte _hours;
         private readonly byte _minutes;
@@ -71,12 +71,12 @@
         public override string ToString() { return $"{_hours:D2}:{_minutes:D2}:{_seconds:D2}:{_milliseconds:D2}"; }
         
         //przeciazanie operatora ==
-        public static Time operator ==(Time a, Time b)
+        public static bool operator ==(Time a, Time b)
         {
         return ((a._hours).Equals(b._hours) && (a._minutes).Equals(b._minutes) && (a._seconds).Equals(b._seconds) && (a._milliseconds).Equals(b._milliseconds));
         }
         //przeciazanie operatora !=
-        public static Time operator !=(Time a,Time b)
+        public static bool operator !=(Time a,Time b)
         {
         
         }
