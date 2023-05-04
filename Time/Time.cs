@@ -128,4 +128,8 @@ namespace czas
 
 
     }//koniec struktury Time
+
+    public struct TimePeriod
+    {
+    }
 }//Koniec przestrzeni nazw 
