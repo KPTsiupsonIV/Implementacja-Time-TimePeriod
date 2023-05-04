@@ -1,6 +1,6 @@
 ﻿namespace Time
 {
-    public struct Time
+    public struct Time : IEquatable<Time> : IComparable<Time>
     {
         private readonly byte _hours;
         private readonly byte _minutes;
@@ -40,17 +40,48 @@
             _seconds = 0;
             _milliseconds = 0;
         }
+        
+        
         public Time(string czas)
         {
             //dopisac sprawdzanie parsowania
-            string[] timeParts = czas.Split(':');
-            _hours = byte.Parse(timeParts[0]);
-            _minutes = byte.Parse(timeParts[1]);
-            _seconds = byte.Parse(timeParts[2]);
-            _milliseconds = ushort.Parse(timeParts[3]);
+            if (string.IsNullOrEmpty(czas) || !czas.Contains(":"))
+            {
+                throw new ArgumentException("Czas jest nieprawidłowy");
+            }
+            byte zmienna;
+            ushort zmienna2;
+            string[] timeParts;
+            try
+            {
+                timeParts = czas.Split(':');
+                if(timeParts.Length !=4) throw new ArgumentException();
+            }
+            catch(IndexOutOfRangeException)
+            {
+                return throw new ArgumentException();
+            }
+            (byte.TryParse(timeParts[0],out zmienna)?(zmienna<24)?_hours = zmienna : throw new ArgumentException() : throw new ArgumentException();
+            (byte.TryParse(timeParts[1],out zmienna)?(zmienna<60)?_minutes = zmienna : throw new ArgumentException() : throw new ArgumentException();
+            (byte.TryParse(timeParts[2],out zmienna)?(zmienna<60)?_seconds = zmienna : throw new ArgumentException() : throw new ArgumentException();
+            (ushort.TryParse(timeParts[3],out zmienna)?(zmienna<1000)?_milliseconds = zmienna : throw new ArgumentException() : throw new ArgumentException();
         }
+        
+        
         public override string ToString() { return $"{_hours:D2}:{_minutes:D2}:{_seconds:D2}:{_milliseconds:D2}"; }
-
+        
+        //przeciazanie operatora ==
+        public static Time operator ==(Time a, Time b)
+        {
+        return ((a._hours).Equals(b._hours) && (a._minutes).Equals(b._minutes) && (a._seconds).Equals(b._seconds) && (a._milliseconds).Equals(b._milliseconds));
+        }
+        //przeciazanie operatora !=
+        public static Time operator !=(Time a,Time b)
+        {
+        
+        }
+        
+        
 
 
     }//koniec struktury Time
