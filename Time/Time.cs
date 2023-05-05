@@ -131,5 +131,126 @@ namespace czas
 
     public struct TimePeriod
     {
+        private readonly byte _hours;
+        private readonly byte _minutes;
+        private readonly byte _seconds;
+        private readonly ushort _milliseconds;
+        private readonly long _durationInMil
+
+        public byte Hours => _hours;
+        public byte Minutes => _minutes;
+        public byte Seconds => _seconds;
+        public ushort Milliseconds => _milliseconds;
+        public long DurationInMIl => _durationInMil;
+        
+        _durationInMil = Convert.ToInt64(_hours) * 3600000 + Convert.ToInt64(_minutes) * 60000 + Convert.ToInt64(_seconds) * 1000 + Convert.ToInt64(_milliseconds);
+        
+          public TimePeriod(byte hours,byte minutes,byte seconds, ushort miliseconds)
+        {
+             if(milliseconds != null)
+             {
+                 if(milliseconds >= 1000)
+                 {
+                     throw new ArgumentException("milliseconds more than 1000")
+                 }
+                 _milliseconds = milliseconds;
+             }else throw new ArgumentException("cant be null");
+              
+             if(seconds != null)
+             {
+                 if(seconds >=60)
+                 {
+                     throw new ArgumentException("cant be more than 60");
+                 }
+                 _seconds = seconds;
+             }else throw new ArgumentException("cant be null")
+                 
+             if(minutes != null)
+             {
+                 if(minutes >= 60)
+                 {
+                    throw new ArgumentException("cant be more than 60");
+                 }
+                 _minutes = minutes;
+             }else throw new ArgumentException("cannot be null");
+              
+             if(hours != null)
+             {
+                 _hours = hours;
+             }throw new ArgumentException("cannot be null"); 
+              
+        }//koniec konstruktora 
+        
+        public TimePeriod(byte hours,byte minutes,byte seconds)
+        {
+             if(seconds != null)
+             {
+                 if(seconds >=60)
+                 {
+                     throw new ArgumentException("cant be more than 60");
+                 }
+                 _seconds = seconds;
+             }else throw new ArgumentException("cant be null")
+                 
+             if(minutes != null)
+             {
+                 if(minutes >= 60)
+                 {
+                    throw new ArgumentException("cant be more than 60");
+                 }
+                 _minutes = minutes;
+             }else throw new ArgumentException("cannot be null");
+              
+             if(hours != null)
+             {
+                 _hours = hours;
+             }throw new ArgumentException("cannot be null"); 
+              
+        }//koniec konstruktora 
+        
+        public TimePeriod(byte hours,byte minutes)
+        {
+             if(minutes != null)
+             {
+                 if(minutes >= 60)
+                 {
+                    throw new ArgumentException("cant be more than 60");
+                 }
+                 _minutes = minutes;
+             }else throw new ArgumentException("cannot be null");
+              
+             if(hours != null)
+             {
+                 _hours = hours;
+             }throw new ArgumentException("cannot be null"); 
+              
+        }//koniec konstruktora 
+        
+        public TimePeriod(byte hours)
+        {
+             if(hours != null)
+             {
+                 _hours = hours;
+             }throw new ArgumentException("cannot be null"); 
+              
+        }//koniec konstruktora 
+        
+        public TimePeriod(Time a, Time b)
+        {
+             if(a > b)
+             {
+                 
+             }
+            else if(b > a)
+            {
+                
+            }
+            else
+            {
+                
+            }
+              
+        }//koniec konstruktora 
+        
     }
 }//Koniec przestrzeni nazw 
