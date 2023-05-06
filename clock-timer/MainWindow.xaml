@@ -1,0 +1,22 @@
+﻿<Window x:Class="clock_timer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:clock_timer"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Grid Height="NaN" Margin="0,0,0,1">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black"/>
+                <GradientStop Color="#FF67D5E4" Offset="0.335"/>
+                <GradientStop Color="#FF21DFF7" Offset="0.134"/>
+                <GradientStop Color="#FF25DFF7" Offset="0"/>
+                <GradientStop Color="#FFACF6FF" Offset="0.575"/>
+                <GradientStop Color="#FFA9F5FE" Offset="0.916"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Label x:Name="TimerLabel" Content="0" Margin="10,17,0,0" Height="NaN" Width="NaN" FontSize="72" FontFamily="Bahnschrift Light" Foreground="#FF4554D0" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+    </Grid>
+</Window>
