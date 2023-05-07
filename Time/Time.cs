@@ -14,8 +14,11 @@ namespace czas
         public byte Seconds => _seconds;
         public ushort Milliseconds => _milliseconds;
 
+        public byte Min { get; private set; }
+
         public Time(byte hours,byte minutes,byte seconds, ushort miliseconds)
         {
+            Min = 0;
             _hours = !(hours >= 24) ? _hours  =hours : throw new ArgumentException();
             _minutes = !(minutes >= 60) ? _minutes = minutes: throw new ArgumentException();
             _seconds = !(seconds >= 60) ? _seconds = seconds: throw new ArgumentException();
@@ -23,6 +26,7 @@ namespace czas
         }
         public Time(byte hours, byte minutes, byte seconds)
         {
+            Min = 0;
             _hours = !(hours >= 24) ? _hours = hours : throw new ArgumentException();
             _minutes = !(minutes >= 60) ? _minutes = minutes : throw new ArgumentException();
             _seconds = !(seconds >= 60) ? _seconds = seconds : throw new ArgumentException();
@@ -30,6 +34,7 @@ namespace czas
         }
         public Time(byte hours, byte minutes)
         {
+            Min = 0;
             _hours = !(hours >= 24) ? _hours = hours : throw new ArgumentException();
             _minutes = !(minutes >= 60) ? _minutes = minutes : throw new ArgumentException();
             _seconds = 0;
@@ -37,6 +42,7 @@ namespace czas
         }
         public Time(byte hours)
         {
+            Min = 0;
             _hours = !(hours >= 24) ? _hours = hours : throw new ArgumentException();
             _minutes = 0;
             _seconds = 0;
@@ -46,6 +52,7 @@ namespace czas
         
         public Time(string czas)
         {
+            Min = 0;
             //dopisac sprawdzanie parsowania
             if (string.IsNullOrEmpty(czas) || !czas.Contains(":"))
             {
@@ -189,8 +196,24 @@ namespace czas
 
         public Time PlusSeconds(byte seconds)
         {
+            byte Hour = _hours;
+            byte Min = _minutes;
             byte zmienaa = (byte)(_seconds + seconds);
-            return new Time(_hours,_minutes,zmienaa);
+            if(zmienaa >=59) {
+                
+                zmienaa = 0;
+                Min = (byte)(Min + 1);
+            }
+            if(Min >= 59)
+            {
+                Min = 0;
+                Hour = (byte)(Hour + 1);
+            }
+            if(Hour >= 24)
+            {
+                Hour = 0;
+            }
+            return new Time(Hour,Min,zmienaa);
         }
 
         public static Time Now()
