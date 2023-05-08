@@ -215,6 +215,34 @@ namespace czas
             }
             return new Time(Hour,Min,zmienaa);
         }
+        public Time PlusMilli(byte milliseconds) 
+        {
+            byte Hour = _hours;
+            byte Min = _minutes;
+            byte Sec = _seconds;
+            ushort zmienaa = (byte)(_milliseconds + milliseconds);
+            if (zmienaa >= 999)
+            {
+
+                zmienaa = 0;
+                Min = (byte)(Min + 1);
+            }
+            if(Sec >= 59)
+            {
+                Sec = 0;
+                Min += 1;
+            }
+            if (Min >= 59)
+            {
+                Min = 0;
+                Hour = (byte)(Hour + 1);
+            }
+            if (Hour >= 24)
+            {
+                Hour = 0;
+            }
+            return new Time(Hour, Min, Sec ,zmienaa);
+        }
 
         public static Time Now()
         {
