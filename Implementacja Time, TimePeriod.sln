@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeUnitTest", "TimeUnitTes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zegar", "Zegar\Zegar.csproj", "{755522B7-A11C-44BC-985D-0FB3C4C85599}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeBezMillisekund", "TimeBezMillisekund\TimeBezMillisekund.csproj", "{2D65607F-364F-4B89-8470-66C97EB870CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{755522B7-A11C-44BC-985D-0FB3C4C85599}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{755522B7-A11C-44BC-985D-0FB3C4C85599}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{755522B7-A11C-44BC-985D-0FB3C4C85599}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D65607F-364F-4B89-8470-66C97EB870CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D65607F-364F-4B89-8470-66C97EB870CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D65607F-364F-4B89-8470-66C97EB870CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D65607F-364F-4B89-8470-66C97EB870CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
