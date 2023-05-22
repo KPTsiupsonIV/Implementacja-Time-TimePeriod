@@ -14,11 +14,11 @@ namespace czas
         public byte Seconds => _seconds;
         public ushort Milliseconds => _milliseconds;
 
-        public byte Min { get; private set; }
+        
 
         public Time(byte hours,byte minutes,byte seconds, ushort miliseconds)
         {
-            Min = 0;
+            
             _hours = !(hours >= 24) ? _hours  =hours : throw new ArgumentException();
             _minutes = !(minutes >= 60) ? _minutes = minutes: throw new ArgumentException();
             _seconds = !(seconds >= 60) ? _seconds = seconds: throw new ArgumentException();
@@ -26,7 +26,7 @@ namespace czas
         }
         public Time(byte hours, byte minutes, byte seconds)
         {
-            Min = 0;
+            
             _hours = !(hours >= 24) ? _hours = hours : throw new ArgumentException();
             _minutes = !(minutes >= 60) ? _minutes = minutes : throw new ArgumentException();
             _seconds = !(seconds >= 60) ? _seconds = seconds : throw new ArgumentException();
@@ -34,7 +34,7 @@ namespace czas
         }
         public Time(byte hours, byte minutes)
         {
-            Min = 0;
+            
             _hours = !(hours >= 24) ? _hours = hours : throw new ArgumentException();
             _minutes = !(minutes >= 60) ? _minutes = minutes : throw new ArgumentException();
             _seconds = 0;
@@ -42,7 +42,7 @@ namespace czas
         }
         public Time(byte hours)
         {
-            Min = 0;
+            
             _hours = !(hours >= 24) ? _hours = hours : throw new ArgumentException();
             _minutes = 0;
             _seconds = 0;
@@ -52,8 +52,7 @@ namespace czas
         
         public Time(string czas)
         {
-            Min = 0;
-            //dopisac sprawdzanie parsowania
+            
             if (string.IsNullOrEmpty(czas) || !czas.Contains(":"))
             {
                 throw new ArgumentException("Czas jest nieprawidłowy");
@@ -199,7 +198,7 @@ namespace czas
             byte Hour = _hours;
             byte Min = _minutes;
             byte zmienaa = (byte)(_seconds + seconds);
-            if(zmienaa >=59) {
+            if(zmienaa >=60) {
                 
                 zmienaa = 0;
                 Min = (byte)(Min + 1);
@@ -215,24 +214,24 @@ namespace czas
             }
             return new Time(Hour,Min,zmienaa);
         }
-        public Time PlusMilli(byte milliseconds) 
+        public Time PlusMilli(ushort milliseconds) 
         {
             byte Hour = _hours;
             byte Min = _minutes;
             byte Sec = _seconds;
-            ushort zmienaa = (byte)(_milliseconds + milliseconds);
-            if (zmienaa >= 999)
+            ushort zmienaa = ((ushort)(_milliseconds + milliseconds));
+            if (zmienaa > 999)
             {
 
-                zmienaa = 0;
-                Min = (byte)(Min + 1);
+                zmienaa = (ushort)(zmienaa % 1000);
+                Sec = (byte)(Sec + 1);
             }
-            if(Sec >= 59)
+            if(Sec >= 60)
             {
                 Sec = 0;
                 Min += 1;
             }
-            if (Min >= 59)
+            if (Min >= 60)
             {
                 Min = 0;
                 Hour = (byte)(Hour + 1);
@@ -363,7 +362,7 @@ namespace czas
 
         public TimePeriod(string czas)
         {
-            //dopisac sprawdzanie parsowania
+            
             if (string.IsNullOrEmpty(czas) || !czas.Contains(":"))
             {
                 throw new ArgumentException("Czas jest nieprawidłowy");
@@ -418,6 +417,8 @@ namespace czas
 
         }//koniec konstruktora */
 
+
+        //ToString() override
         public override string ToString() => $"{_hours}:{_minutes:D2}:{_seconds:D2}:{_milliseconds:D2}";
 
 
@@ -426,11 +427,13 @@ namespace czas
         {
             return ((a._hours).Equals(b._hours) && (a._minutes).Equals(b._minutes) && (a._seconds).Equals(b._seconds) && (a._milliseconds).Equals(b._milliseconds));
         }
+
         //przeciazanie operatora !=
         public static bool operator !=(TimePeriod a, TimePeriod b)
         {
             return !(a == b);
         }
+
         //przeciazanie operatora <
         public static bool operator <(TimePeriod a, TimePeriod b)
         {

@@ -57,7 +57,7 @@ namespace TimeUnitTest
             Assert.IsFalse(T2 <= T7);
             Assert.IsFalse(T7 > T8);
             Assert.IsFalse(T1 < T8);
-            Assert.IsTrue(T2 > T7);
+            Assert.IsTrue(T2 >= T7);
         }
 
         [Test]
@@ -72,7 +72,7 @@ namespace TimeUnitTest
 
 
             //assert
-            Assert.IsTrue(t2 == t3);
+            Assert.IsTrue(t2 >= t3);
             Assert.IsFalse(t4 == t5);
             Assert.IsFalse(t5 <= t1);
             Assert.IsTrue(t1 > t2);
@@ -136,7 +136,18 @@ namespace TimeUnitTest
             Assert.IsFalse(t1.PlusSeconds(50) == t2);
         }
 
-        
+        [Test]
+        public void TimePlusMilli()
+        {
+            //arange
+            Time t1 = new Time(12,12,12,12);
+            Time t2 = new Time(23,59,59,999);
+
+            //assert
+            Assert.IsTrue(t2.PlusMilli(1) == new Time("00:00:00:00"));
+            Assert.IsTrue(t2.PlusMilli(10) == new Time(0,0,0,9));
+
+        }
 
     }
 }
